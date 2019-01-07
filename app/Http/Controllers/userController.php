@@ -10,21 +10,28 @@ class userController extends Controller
     public function index()
     {
 
-        //Datos que queremos pasar a nuestra vista desde el controlador
 
-        $users=[
-            'johana',
-            'pepito',
-            'manuel',
-            'tomy',
-        ];
+        if (request()->has('empty')) {
+
+            $users = [];
+        } else {
+            //Datos que queremos pasar a nuestra vista desde el controlador
+            $users = [
+                'johana',
+                'pepito',
+                'manuel',
+                'tomy',
+            ];
+
+        }
+
 
         $title = 'listado de usuarios';
 
         //Para pasar los datos de $user a la vista debo pasar como segundo argumento de la función view
         // las variables que quiero pasar a mi vista
 
-        return view('users', compact('users', 'title'));
+        return view('users.index', compact('users', 'title'));
 
     }
 
@@ -33,13 +40,15 @@ class userController extends Controller
         return 'usuario creado';
     }
 
-    public function show($id){
+    public function show($id)
+    {
 
-        return "mostrando a usuario:{$id}";
+        return view('users.show', compact('id'));
 
     }
 
-    public function welcome($name, $lastname){
+    public function welcome($name, $lastname)
+    {
 
         return "Bienvenido {$name}, tu apellido es {$lastname}";
 
